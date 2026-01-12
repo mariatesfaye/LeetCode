@@ -35,8 +35,6 @@ var basicCalculatorIV = function(expression, evalvars, evalints) {
         }
         return res;
     }
-
-    // Proper tokenizer
     const tokens = expression.replace(/\(/g, " ( ").replace(/\)/g, " ) ").split(" ").filter(Boolean);
     let idx = 0;
 
@@ -63,7 +61,7 @@ var basicCalculatorIV = function(expression, evalvars, evalints) {
         const token = tokens[idx++];
         if (token === "(") {
             const res = parseExpr();
-            idx++; // skip ')'
+            idx++;
             return res;
         }
         if (/^\d+$/.test(token)) return new Map([["", Number(token)]]);
@@ -72,11 +70,7 @@ var basicCalculatorIV = function(expression, evalvars, evalints) {
     }
 
     let poly = parseExpr();
-
-    // Filter zero-coefficient terms
     poly = new Map([...poly.entries()].filter(([k, v]) => v !== 0));
-
-    // Format output
     return [...poly.entries()]
         .sort((a, b) => {
             const da = a[0] ? a[0].split("*").length : 0;
