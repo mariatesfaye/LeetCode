@@ -1,0 +1,22 @@
+class Solution(object):
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        
+        row1 = set("qwertyuiop")
+        row2 = set("asdfghjkl")
+        row3 = set("zxcvbnm")
+        
+        result = []
+        
+        for word in words:
+            w = word.lower()
+            
+            if set(w).issubset(row1) or \
+               set(w).issubset(row2) or \
+               set(w).issubset(row3):
+                result.append(word)
+                
+        return result
